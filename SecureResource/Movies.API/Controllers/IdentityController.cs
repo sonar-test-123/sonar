@@ -18,13 +18,5 @@ namespace Movies.API.Controllers
         {
             return new JsonResult(from c in User.Claims select new { c.Type, c.Value });
         }
-        public IActionResult GetTest()
-        {
-            return new JsonResult(from c in User.Claims select new { c.Type, c.Value });
-        }
-        public IActionResult GetTests()
-        {
-            return new JsonResult(from c in User.Claims select new { c.Type, c.Value });
-        }
     }
 }

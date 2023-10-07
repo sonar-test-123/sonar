@@ -2,7 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-	  <ProjectGuid>{82b20299-7cca-4a4e-8afd-c34d9c68e70e}</ProjectGuid>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>$(DefineConstants);UnitTest</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>

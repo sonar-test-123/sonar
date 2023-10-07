@@ -108,5 +108,32 @@ namespace Movies.API.Controllers
         {
             return _context.Movie.Any(e => e.Id == id);
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutMovieTest(int id, Movie movie)
+        {
+            _context.Entry(movie).State = EntityState.Modified;
+
+                await _context.SaveChangesAsync();
+            
+            return NoContent();
+        }
+
+        //[HttpGet("[action]/{selectedFileName}/{selectedTruckModel}/{selectedTravelTimeSettingName}/{selectedCorneringSettingId}/{selectedImportTemplateSettingId}/{selectedPropertiesName}")]
+        //public IEnumerable<RPMTravelTimeTest> CalculateTravelTimeFromSegmentFile(string selectedFileName, string selectedTruckModel, string selectedTravelTimeSettingName, string selectedCorneringSettingId, string selectedImportTemplateSettingId,string selectedPropertiesName)
+        //{
+        //        var travelTimeTestList = new RPMTravelTimeTestCollection();
+        //        travelTimeTestList.LoadTravelTimeTestBySegmentFile(_isHaaSProduction,
+        //                                                        config.Value.StandardHaulageConnectString,
+        //                                                        selectedTruckModel,
+        //                                                        selectedTravelTimeSettingName,
+        //                                                        selectedCorneringSettingId,
+        //                                                        selectedImportTemplateSettingId,
+        //                                                        selectedFileName,
+        //                                                        selectedPropertiesName);
+
+        //    return travelTimeTestList;
+        //}
+
     }
 }

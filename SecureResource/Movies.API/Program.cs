@@ -11,7 +11,7 @@ using Movies.API.Data;
 
 namespace Movies.API
 {
-    public static class Program
+    public class Program
     {
         public static void Main(string[] args)
         {
