@@ -10,6 +10,10 @@ jobs:
     name: Build and analyze
     runs-on: windows-latest
     steps: 
+      - name: Installing dotnet-coverage
+        shell: powershell
+        run: dotnet tool install --global dotnet-coverage    
+        
       - name: Installing xmldocmd
         shell: powershell
         run: dotnet tool install --global xmldocmd 
