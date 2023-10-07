@@ -74,7 +74,8 @@ namespace IdentityServer.UnitTest.Quickstart.Account
             
             var result = await _accountController.Login("/Account");
             result.Should().NotBeNull();
-            
+            Assert.False(result.Equals(authorization));
+
         }
 
         private List<TestUser> lsTestUser()
