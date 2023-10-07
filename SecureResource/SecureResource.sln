@@ -11,9 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Movies.Client", "Movies.Cli
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiGateway", "ApiGateway\ApiGateway.csproj", "{E36C8490-0258-4255-8C58-C49AA7912109}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Movie.API.UnitTest", "Movie.API.UnitTest\Movie.API.UnitTest.csproj", "{D1D8A9FB-1DE6-4E14-A41C-23897A9028C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Movie.API.UnitTest", "Movie.API.UnitTest\Movie.API.UnitTest.csproj", "{D1D8A9FB-1DE6-4E14-A41C-23897A9028C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Movies.Client.UnitTest", "Movies.Client.UnitTest\Movies.Client.UnitTest.csproj", "{63FAF270-71FA-471E-84CE-1E0CE6FDF1CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Movies.Client.UnitTest", "Movies.Client.UnitTest\Movies.Client.UnitTest.csproj", "{63FAF270-71FA-471E-84CE-1E0CE6FDF1CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServer.UnitTest", "IdentityServer.UnitTest\IdentityServer.UnitTest.csproj", "{749597BC-A51C-4B44-9A3E-9AF8B05AB5A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{63FAF270-71FA-471E-84CE-1E0CE6FDF1CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63FAF270-71FA-471E-84CE-1E0CE6FDF1CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63FAF270-71FA-471E-84CE-1E0CE6FDF1CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{749597BC-A51C-4B44-9A3E-9AF8B05AB5A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{749597BC-A51C-4B44-9A3E-9AF8B05AB5A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{749597BC-A51C-4B44-9A3E-9AF8B05AB5A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{749597BC-A51C-4B44-9A3E-9AF8B05AB5A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
