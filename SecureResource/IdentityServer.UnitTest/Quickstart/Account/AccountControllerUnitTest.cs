@@ -1,22 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
+using FluentAssertions;
+using IdentityServer4.Models;
 using IdentityServer4.Services;
 using IdentityServer4.Stores;
 using IdentityServer4.Test;
 using IdentityServerHost.Quickstart.UI;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.TestHost;
 using Moq;
+using Newtonsoft.Json.Linq;
 
 namespace IdentityServer.UnitTest.Quickstart.Account
 {
-    public class AccountControllerUnitTest
+    public class AccountControllerUnitTest : IntegrationTestBase
     {
         private readonly Mock<TestUserStore> _mockUsers;
         private readonly Mock<IIdentityServerInteractionService> _mockInteraction;
@@ -24,6 +31,7 @@ namespace IdentityServer.UnitTest.Quickstart.Account
         private readonly Mock<IAuthenticationSchemeProvider> _mockSchemeProvider;
         private readonly Mock<IEventService> _mockEvents;
         private readonly AccountController _accountController;
+        TestServer _server;
 
         public AccountControllerUnitTest()
         {
@@ -39,28 +47,34 @@ namespace IdentityServer.UnitTest.Quickstart.Account
         [Fact]
         public async Task GetLoginSuccess()
         {
+
             var user = new TestUser() { Username = "JohnDoe", SubjectId = "1" };
+            AuthorizationRequest authorization = new AuthorizationRequest();
+            authorization.Client = new Client();
+            authorization.IdP = "test";
+            authorization.LoginHint = user.Username;
+
+            var scheme = new AuthenticationScheme(
+                "Test",
+                "Test",
+                typeof(MockAuthenticationHandler)
+            );
+
             var claims = new List<Claim>()
             {
                 new Claim(ClaimTypes.Name, user.Username),
                 new Claim(ClaimTypes.NameIdentifier, user.SubjectId),
                 new Claim("name", user.Username),
             };
-            var identity = new ClaimsIdentity(claims, "Test");
+            var identity = new ClaimsIdentity(claims, "JohnDoe");
             var claimsPrincipal = new ClaimsPrincipal(identity);
-
-            var mockPrincipal = new Mock<IPrincipal>();
-            mockPrincipal.Setup(x => x.Identity).Returns(identity);
-            mockPrincipal.Setup(x => x.IsInRole(It.IsAny<string>())).Returns(true);
-
-            var mockHttpContext = new Mock<HttpContext>();
-            mockHttpContext.Setup(m => m.User).Returns(claimsPrincipal);
-
-            //_mockInteraction.Setup(x => x.GetAuthorizationContextAsync(It.IsAny<string>())).Returns()
-
-            _accountController.Login("test");
-
-
+;
+            _mockInteraction.Setup(x => x.GetAuthorizationContextAsync(It.IsAny<string>())).Returns(Task.FromResult(authorization));
+            _mockSchemeProvider.Setup(x => x.GetSchemeAsync(It.IsAny<string>())).ReturnsAsync(scheme);
+            
+            var result = await _accountController.Login("/Account");
+            result.Should().NotBeNull();
+            
         }
 
         private List<TestUser> lsTestUser()
@@ -69,7 +83,7 @@ namespace IdentityServer.UnitTest.Quickstart.Account
             {
                 new TestUser()
                 {
-                    Username = "test1",
+                    Username = "JohnDoe",
                     SubjectId = "1"
                 },
                 new TestUser()
