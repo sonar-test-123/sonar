@@ -15,7 +15,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Movie.API.UnitTest", "Movie
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Movies.Client.UnitTest", "Movies.Client.UnitTest\Movies.Client.UnitTest.csproj", "{63FAF270-71FA-471E-84CE-1E0CE6FDF1CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServer.UnitTest", "IdentityServer.UnitTest\IdentityServer.UnitTest.csproj", "{749597BC-A51C-4B44-9A3E-9AF8B05AB5A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer.UnitTest", "IdentityServer.UnitTest\IdentityServer.UnitTest.csproj", "{749597BC-A51C-4B44-9A3E-9AF8B05AB5A9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DC119E4C-D954-4F8A-8E65-71865088096C}"
+	ProjectSection(SolutionItems) = preProject
+		coverage.xml = coverage.xml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
