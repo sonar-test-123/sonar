@@ -27,6 +27,11 @@ namespace Movies.Client.UnitTest.ApiServices
         {
             string testContent = Newtonsoft.Json.JsonConvert.SerializeObject(FakeMoviesDataMovies());
             var handlerMock = new Mock<HttpMessageHandler>(MockBehavior.Strict);
+            var testSmellCode = "test string";
+            
+            if(testSmellCode ==  "test string"){
+                testSmellCode = "";
+            }
 
             HttpResponseMessage httpResponseMessage = new HttpResponseMessage(HttpStatusCode.OK)
             {
