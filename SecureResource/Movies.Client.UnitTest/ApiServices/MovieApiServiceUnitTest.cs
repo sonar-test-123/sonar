@@ -33,6 +33,12 @@ namespace Movies.Client.UnitTest.ApiServices
             if(testSmellCode ==  "test string"){
                 testSmellCode = "";
             }
+            if(testSmellCode ==  ""){
+                testSmellCode = "1";
+            }
+            if(testSmellCode ==  "1"){
+                testSmellCode = "test string 2";
+            }
 
             HttpResponseMessage httpResponseMessage = new HttpResponseMessage(HttpStatusCode.OK)
             {
