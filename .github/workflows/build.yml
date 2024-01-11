@@ -50,7 +50,8 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"sonar-test-123_sonar" /o:"sonar-test-123" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.verbose=true
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"sonar-test-123_sonar" /o:"sonar-test-123" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.verbose=true /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml
           dotnet clean
           dotnet build .\SecureResource\SecureResource.sln
+          dotnet-coverage collect 'dotnet test' -f xml  -o 'coverage.xml'
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
