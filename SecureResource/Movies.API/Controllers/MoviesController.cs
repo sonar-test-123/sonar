@@ -40,7 +40,12 @@ namespace Movies.API.Controllers
             {
                 return NotFound();
             }
-
+            //smell code test
+            var text = "test1";
+            if(text == ""){
+                text = "";
+            }
+            
             return movie;
         }
 
