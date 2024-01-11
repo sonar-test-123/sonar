@@ -14,6 +14,17 @@ namespace Movies.Client.UnitTest.ApiServices
         private readonly MovieApiService _movieApiService;
         private readonly Mock<IHttpClientFactory> _httpClientFactoryMock;
         private readonly Mock<IHttpContextAccessor> _httpContextAccessorMock;
+        public interface IMyInterface
+        {
+        }
+        
+        public class MyClass : IMyInterface
+        {
+            public override bool Equals(object obj)
+            {
+                //...
+            }
+        }
 
         public MovieApiServiceUnitTest()
         {
@@ -21,7 +32,13 @@ namespace Movies.Client.UnitTest.ApiServices
             _httpContextAccessorMock = new Mock<IHttpContextAccessor>();
             _movieApiService = new MovieApiService(_httpClientFactoryMock.Object, _httpContextAccessorMock.Object);
         }
-
+        public static void Method(IMyInterface instance1, IMyInterface instance2)
+            {
+                if (instance1 == instance2) // Noncompliant, will do reference equality check, but was that intended? MyClass overrides Equals.
+                {
+                    Console.WriteLine("Equal");
+                }
+            }
         [Fact]
         public async Task GetMoviesSuccess()
         {
