@@ -57,6 +57,39 @@ namespace Movies.Client.UnitTest.ApiServices
 
 
         [Fact]
+        public async Task GetMoviesFail()
+        {
+            string testContent = Newtonsoft.Json.JsonConvert.SerializeObject(FakeMoviesDataMovies());
+            var handlerMock = new Mock<HttpMessageHandler>(MockBehavior.Strict);
+
+            HttpResponseMessage httpResponseMessage = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(testContent)
+            };
+
+            handlerMock
+                .Protected()
+                .Setup<Task<HttpResponseMessage>>(
+                    "SendAsync",
+                    ItExpr.IsAny<HttpRequestMessage>(),
+                    ItExpr.IsAny<CancellationToken>()
+                )
+                .ReturnsAsync(httpResponseMessage)
+                .Verifiable();
+
+            var httpClient = new HttpClient(handlerMock.Object)
+            {
+                BaseAddress = new Uri("https://test.com/")
+            };
+
+            _httpClientFactoryMock.Setup(_ => _.CreateClient(It.IsAny<string>())).Returns(httpClient);
+            
+
+            var result = await _movieApiService.GetMovies();
+            result.Count().Should().Be(-1);
+        }
+
+        [Fact]
         public async Task GetUserInfoSuccess()
         {
             string testContent = Newtonsoft.Json.JsonConvert.SerializeObject(FakeMoviesDataMovies());
